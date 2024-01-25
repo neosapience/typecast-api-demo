@@ -1,2 +1,3 @@
-# typecast-api-demo
-Typecast API Demo
+# Typecast API Demo
+
+https://docs.typecast.ai/

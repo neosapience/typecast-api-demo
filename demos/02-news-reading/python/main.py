@@ -6,7 +6,7 @@ from io import BytesIO
 from pydub import AudioSegment
 
 
-API_TOKEN = 'your-api-token'
+API_TOKEN = {{your token here}}
 HEADERS = {'Authorization': f'Bearer {API_TOKEN}'}
 
 

@@ -2,7 +2,6 @@ import requests
 import time
 
 API_TOKEN = {{your token here}}
-
 HEADERS = {'Authorization': f'Bearer {API_TOKEN}'}
 
 # get my actor
