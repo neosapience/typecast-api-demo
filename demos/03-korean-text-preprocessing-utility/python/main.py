@@ -1,4 +1,5 @@
 import re
+import csv
 
 
 def _cvt_digit_to_korean(elements):
@@ -81,6 +82,12 @@ def _cvt_pmhour_to_korean(elements):
     return output
 
 
+def _prep_mydict(text, mydict):
+    for key, value in mydict.items():
+        text = text.replace(key, value)
+    return text
+
+
 def _prep_hour_with_fromto(text):
     pattern = re.compile(r'(\d+시)~(\d+시까지)')
     return pattern.sub(r'\1에서 \2', text)
@@ -114,7 +121,8 @@ def _prep_pmhour(text):
     return text
 
 
-def preprocess(text):
+def preprocess(text, mydict):
+    text = _prep_mydict(text, mydict)
     text = _prep_hour_with_fromto(text)
     text = _prep_korea_phone_number(text)
     text = _prep_date(text)
@@ -127,17 +135,23 @@ def preprocess(text):
 
 
 def main():
+    mydict = {}
+    with open('data/dic.csv') as f:
+        rows = csv.reader(f)
+        for cols in rows:
+            mydict[cols[0]] = cols[1]
+
     with open('data/sample.txt') as f:
         for line in f.readlines():
             line = line.strip()
             (src, expected) = line.split('|')
             src = src.strip()
-            expected = expected.strip()  
+            expected = expected.strip()
             
             ########################################################
             # core logic
             ########################################################
-            test = preprocess(src)
+            test = preprocess(src, mydict)
             ########################################################
             
             if expected != test:
