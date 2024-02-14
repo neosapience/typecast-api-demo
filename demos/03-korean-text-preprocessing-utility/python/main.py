@@ -135,12 +135,14 @@ def preprocess(text, mydict):
 
 
 def main():
+    # load my dictionary
     mydict = {}
     with open('data/dic.csv') as f:
         rows = csv.reader(f)
         for cols in rows:
             mydict[cols[0]] = cols[1]
 
+    # test sample dataset
     with open('data/sample.txt') as f:
         for line in f.readlines():
             line = line.strip()
