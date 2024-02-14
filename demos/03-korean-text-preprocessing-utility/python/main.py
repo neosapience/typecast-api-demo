@@ -138,17 +138,16 @@ def main():
     # load my dictionary
     mydict = {}
     with open('data/dic.csv') as f:
-        rows = csv.reader(f)
+        rows = csv.reader(f, delimiter='|')
         for cols in rows:
             mydict[cols[0]] = cols[1]
 
     # test sample dataset
-    with open('data/sample.txt') as f:
-        for line in f.readlines():
-            line = line.strip()
-            (src, expected) = line.split('|')
-            src = src.strip()
-            expected = expected.strip()
+    with open('data/sample.csv') as f:
+        samples = csv.reader(f, delimiter='|')
+        for sample in samples:
+            src = sample[0]
+            expected = sample[1]
             
             ########################################################
             # core logic
